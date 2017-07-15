@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.AdminRoleMapper">
+  <resultMap id="BaseResultMap" type="org.seckill.entity.AdminRole">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="admin_Code" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <resultMap id="adminRoleResultMap" type="org.seckill.entity.AdminRole">
+    <id column="id" property="id" />
+    <result column="admin_Code" property="adminCode" />
+    <result column="role_Id" property="roleId" />
+    <association  javaType="roleConfig" property="roleConfig">
+      <id column="role_Id" property="roleId" />
+      <result column="role_name" property="roleName" />
+      <result column="valid_status" property="validStatus" />
+    </association>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.seckill.entity.AdminRole">
+    insert into admin_role (id, admin_Code, role_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{adminCode,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.seckill.entity.AdminRole">
+    update admin_role
+    set admin_Code = #{adminCode,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, admin_Code, role_id
+    from admin_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, admin_Code, role_id
+    from admin_role
+  </select>
+  <select id="selectByAdminCode" resultMap="adminRoleResultMap">
+    SELECT  * from  admin_role a , role_config  b
+    WHERE  a.role_id = b.role_id
+    and a.admin_Code = #{adminCode,jdbcType=BIGINT}
+  </select>
+
+
+
+</mapper>

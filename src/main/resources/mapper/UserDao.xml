@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.UserDao">
+    <select id="queryByuserName" resultType="User" parameterType="String" >
+      SELECT
+            id ,user_Name,psw,status,create_time
+      FROM User
+        WHERE   user_Name = #{userName}
+    </select>
+</mapper>

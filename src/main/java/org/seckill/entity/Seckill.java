@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Seckill {
     private  Long      seckillId ;
-    private  Long    number ;
+    private  Long      number ;
     private  String    name ;
     private  Date      startTime ;
     private  Date      endTime ;

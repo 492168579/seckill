@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="org.seckill.entity.Admin">
+    <constructor>
+      <idArg column="admin_Code" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="admin_Name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="admin_Psw" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where admin_Code = #{adminCode,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.seckill.entity.Admin">
+    insert into admin (admin_Code, admin_Name, admin_Psw, 
+      status, create_time)
+    values (#{adminCode,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{adminPsw,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.seckill.entity.Admin">
+    update admin
+    set admin_Name = #{adminName,jdbcType=VARCHAR},
+      admin_Psw = #{adminPsw,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where admin_Code = #{adminCode,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select admin_Code, admin_Name, admin_Psw, status, create_time
+    from admin
+    where admin_Code = #{adminCode,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select admin_Code, admin_Name, admin_Psw, status, create_time
+    from admin
+  </select>
+</mapper>

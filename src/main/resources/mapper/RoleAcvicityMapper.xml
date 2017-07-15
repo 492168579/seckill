@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.seckill.dao.RoleAcvicityMapper">
+  <resultMap id="BaseResultMap" type="org.seckill.entity.RoleAcvicity">
+    <constructor>
+      <idArg column="role_acvicity_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="acvicity_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_acvicity_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <resultMap id="RoleAcvicityResultMap" type="org.seckill.entity.RoleAcvicity">
+    <id column="role_acvicity_id" property="roleAcvicityId" />
+    <result column="role_Id" property="roleId" />
+    <result column="role_acvicity_status" property="roleAcvicityStatus" />
+    <association  javaType="AcvicityConfig" property="acvicityConfig">
+      <id column="acvicity_id" property="acvicityId" />
+      <result column="acvicity_name" property="acvicityName" />
+      <result column="acvicity_url" property="acvicityUrl" />
+      <result column="acvicity_status" property="acvicityStatus" />
+    </association>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role_acvicity
+    where role_acvicity_id = #{roleAcvicityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.seckill.entity.RoleAcvicity">
+    insert into role_acvicity (role_acvicity_id, role_id, acvicity_id, 
+      role_acvicity_status)
+    values (#{roleAcvicityId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{acvicityId,jdbcType=INTEGER}, 
+      #{roleAcvicityStatus,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.seckill.entity.RoleAcvicity">
+    update role_acvicity
+    set role_id = #{roleId,jdbcType=INTEGER},
+      acvicity_id = #{acvicityId,jdbcType=INTEGER},
+      role_acvicity_status = #{roleAcvicityStatus,jdbcType=INTEGER}
+    where role_acvicity_id = #{roleAcvicityId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select role_acvicity_id, role_id, acvicity_id, role_acvicity_status
+    from role_acvicity
+    where role_acvicity_id = #{roleAcvicityId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select role_acvicity_id, role_id, acvicity_id, role_acvicity_status
+    from role_acvicity
+  </select>
+  <select id="selectbyRoleId" parameterType="java.lang.Integer" resultMap="RoleAcvicityResultMap">
+   SELECT * FROM  role_acvicity a  ,acvicity_config  b
+   where a.acvicity_id  = b.acvicity_id
+    and  role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+
+</mapper>
