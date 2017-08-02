@@ -12,6 +12,25 @@ idea 快捷键
 
 mac  操作数据库
 mysql -u root -p
+如何查看数据库引擎
+show engines ;
+show variables like '%storage_engine%';
+对比项        MyISAM       InnoDB
+主外键
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
