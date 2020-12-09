@@ -19,16 +19,12 @@
         <link rel="stylesheet" href="<%=basePath%>resources/bootstrap/css/iriy-admin.min.css">
         <link rel="stylesheet" href="<%=basePath%>resources/demo/css/demo.css">
         <link rel="stylesheet" href="<%=basePath%>resources/bootstrap/assets/font-awesome/css/font-awesome.css">
-        <!--[if lt IE 9]>
-        <script src="resources/bootstrap/assets/libs/html5shiv/html5shiv.min.js"></script>
-        <script src="resources/bootstrap/assets/libs/respond/respond.min.js"></script>
-        <![endif]-->
     </head>
     <body class="body-sign-in">
     <div class="container">
         <div class="panel panel-default form-container">
             <div class="panel-body">
-                <form  method ='post'  action='/login/in'>
+                <form  method ='post'  action='<%=basePath%>/login/in'>
                        <h3 class="text-center margin-xl-bottom">微信管理系统</h3>
                        ${message}
                        <div class="form-group text-center">
